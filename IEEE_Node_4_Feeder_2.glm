@@ -384,7 +384,7 @@ object waterheater {
 		name WHrecorder_1;
 		interval 600;
 		property is_waterheater_on, temperature, height;
-		file "WHoutput.csv";
+		file "WHoutput_1.csv";
 	}; // always put a semicolon for the curly bracket of a nested object
 
 }
@@ -402,6 +402,13 @@ object recorder {
 
 ////////////////////////////////////////////////// *** Exercise 2 starts here *** //////////////////////////////////////////////////
 
+object triplex_meter{
+	name mr_meter_2;
+	phases CS;
+	nominal_voltage 120;
+
+}
+
 object transformer{
 	name split_xfmr_2;
 	phases CS;
@@ -410,13 +417,6 @@ object transformer{
 	configuration PoleTop;
 }
 
-
-object triplex_meter{
-	name mr_meter_2;
-	phases CS;
-	nominal_voltage 120;
-
-}
 
 object house {
 	name house_2;
