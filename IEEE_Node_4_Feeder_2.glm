@@ -397,3 +397,59 @@ object recorder {
 	file output.csv;
 }
 
+
+
+
+////////////////////////////////////////////////// *** Exercise 2 starts here *** //////////////////////////////////////////////////
+
+object transformer{
+	name split_xfmr_2;
+	phases CS;
+	from Node3;
+	to mr_meter_2;
+	configuration PoleTop;
+}
+
+
+object triplex_meter{
+	name mr_meter_2;
+	phases CS;
+	nominal_voltage 120;
+
+}
+
+object house {
+	name house_2;
+	// no need to specify phase used, inherits parent's phase
+//  panel.power_factor 0.98;
+	floor_area random.uniform(2500,100) sf;
+	parent mr_meter_1;
+
+}
+
+object waterheater {
+	parent house_2; // heater is inside the house
+	name waterheater_2;
+	// no need to specify phase used
+	temperature 120; 
+	tank_volume 50;  
+	thermostat_deadband 2; 
+	heating_element_capacity 4.5 kW;
+	water_demand demand;
+	inlet_water_temperature 60;
+	tank_UA 3.3;
+	// new changes
+	tank_setpoint 119;
+	thermostat_deadband 2;
+	object recorder {
+		name WHrecorder_2;
+		interval 600;
+		property is_waterheater_on, temperature, height;
+		file "WHoutput_2.csv";
+	}; // always put a semicolon for the curly bracket of a nested object
+
+////////////////////////////////////////////////// *** Exercise 2 ends here *** //////////////////////////////////////////////////
+
+
+
+
