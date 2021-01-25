@@ -337,99 +337,38 @@ object node {
 	voltage_C -1200.889+2080.000j;
 	nominal_voltage 4160;
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-object transformer{
-	name split_boi2;
-	phases CS;
-	from Node3;
-	to mr_meter2;
-	configuration PoleTop;
 
-}
-
-object triplex_meter{
-	name mr_meter2;
-	phases CS;
-	nominal_voltage 120;
-
-}
-
-object house {
-	name house1;
-	// no need to specify phase used, inherits parent's phase
-//  panel.power_factor 0.98;
-	floor_area random.uniform(2500,100) sf;
-	parent mr_meter1;
-
-}
-
-object waterheater {
-	parent house1; // heater is inside the house
-	name my_waterheater;
-	// no need to specify phase used
-	temperature 120; 
-	tank_volume 50;  
-	thermostat_deadband 2; 
-	heating_element_capacity 4.5 kW;
-	water_demand demand;
-	inlet_water_temperature 60;
-	tank_UA 3.3;
-	// new changes
-	tank_setpoint 119;
-	thermostat_deadband 2;
-	object recorder {
-		name Nadine;
-		interval 600;
-		property is_waterheater_on, temperature, height;
-		file "wh.csv";
-	}; // always put a semicolon for the curly bracket of a nested object
-
-}
-
-object recorder {
-	name mr_recorder;
-	parent mr_meter1;
-	property measured_power.real, measured_current_1, measured_voltage_1; // current & voltage on split phase 1
-	interval 600; // every 10 mins
-	file output.csv;
-}
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 2
 
 //// here are the stuff I added
 
 object transformer{
-	name split_boi;
+	name split_xfmr_1;
 	phases CS;
 	from Node4;
-	to mr_meter1;
+	to mr_meter_1;
 	configuration PoleTop;
 }
 
 
 object triplex_meter{
-	name mr_meter1;
+	name mr_meter_1;
 	phases CS;
 	nominal_voltage 120;
 
 }
 
-
 object house {
-	name house1;
+	name house_1;
 	// no need to specify phase used, inherits parent's phase
 //  panel.power_factor 0.98;
 	floor_area random.uniform(2500,100) sf;
-	parent mr_meter1;
+	parent mr_meter_1;
 
 }
 
 object waterheater {
-	parent house1; // heater is inside the house
-	name my_waterheater;
+	parent house_1; // heater is inside the house
+	name waterheater_1;
 	// no need to specify phase used
 	temperature 120; 
 	tank_volume 50;  
@@ -442,17 +381,17 @@ object waterheater {
 	tank_setpoint 119;
 	thermostat_deadband 2;
 	object recorder {
-		name Nadine;
+		name WHrecorder_1;
 		interval 600;
 		property is_waterheater_on, temperature, height;
-		file "wh.csv";
+		file "WHoutput.csv";
 	}; // always put a semicolon for the curly bracket of a nested object
 
 }
 
 object recorder {
-	name mr_recorder;
-	parent mr_meter1;
+	name mr_recorder_1;
+	parent mr_meter_1;
 	property measured_power.real, measured_current_1, measured_voltage_1; // current & voltage on split phase 1
 	interval 600; // every 10 mins
 	file output.csv;
