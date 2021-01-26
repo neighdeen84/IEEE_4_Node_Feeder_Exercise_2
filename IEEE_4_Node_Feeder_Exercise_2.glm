@@ -404,7 +404,7 @@ object waterheater {
 		name WH_recorder_1;
 		interval 600;
 		property is_waterheater_on, temperature, height,water_demand,heatgain,load_state,waterheater_model;
-		file "wh1.csv";
+		file "wh_output.csv";
 	}; // always put a semicolon for the curly bracket of a nested object
 
 }
@@ -432,5 +432,5 @@ object recorder {
 	parent mr_meter_1;
 	property measured_power.real, measured_current_1, measured_voltage_1; // current & voltage on split phase 1
 	interval 600; // every 10 mins
-	file output.csv;
+	file total_output.csv;
 }
